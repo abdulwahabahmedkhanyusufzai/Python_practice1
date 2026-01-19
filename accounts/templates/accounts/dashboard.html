@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1>Dashboard</h1>
+    <a href="{% url 'create_account' %}" class="btn">Create Account</a>
+</div>
+
+<div class="grid">
+    {% for account in accounts %}
+    <div class="glass-card">
+        <h3>{{ account.name }}</h3>
+        <p class="text-muted">No: {{ account.account_no }}</p>
+        <p class="text-secondary">{{ account.email }}</p>
+        <h2 class="text-success">$ {{ account.balance }}</h2>
+        <div style="margin-top: 1rem;">
+            <a href="{% url 'account_detail' account.pk %}" class="btn btn-outline"
+                style="width:100%; text-align:center;">View Details</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No accounts found. Create one to get started.</p>
+    {% endfor %}
+</div>
+{% endblock %}
